@@ -87,25 +87,30 @@ frontend_set_env() {
   backend_url=${backend_url%%/*}
   backend_url=https://$backend_url
 
-sudo su - deploy << EOF
-  cat <<[-]EOF > /home/deploy/${instancia_add}/frontend/.env
+  # Alterar permissões do diretório frontend
+  sudo chown -R deploy:deploy /home/deploy/${instancia_add}/frontend
+
+  sudo su - deploy << EOF
+    touch /home/deploy/${instancia_add}/frontend/.env
+    cat <<[-]EOF > /home/deploy/${instancia_add}/frontend/.env
 REACT_APP_BACKEND_URL=${backend_url}
-REACT_APP_HOURS_CLOSE_TICKETS_AUTO = 24
-REACT_APP_NAME_SYSTEM =${instancia_add}
+REACT_APP_HOURS_CLOSE_TICKETS_AUTO=24
+REACT_APP_NAME_SYSTEM=${instancia_add}
 [-]EOF
 EOF
 
   sleep 2
 
-sudo su - deploy << EOF
-  cat <<[-]EOF > /home/deploy/${instancia_add}/frontend/server.js
+  sudo su - deploy << EOF
+    touch /home/deploy/${instancia_add}/frontend/server.js
+    cat <<[-]EOF > /home/deploy/${instancia_add}/frontend/server.js
 //simple express server to run frontend production build;
 const express = require("express");
 const path = require("path");
 const app = express();
 app.use(express.static(path.join(__dirname, "build")));
 app.get("/*", function (req, res) {
-	res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 app.listen(${frontend_port});
 
