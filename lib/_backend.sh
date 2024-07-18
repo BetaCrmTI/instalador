@@ -61,23 +61,29 @@ FRONTEND_URL=${frontend_url}
 PROXY_PORT=443
 PORT=${backend_port}
 
-DB_HOST=localhost
 DB_DIALECT=postgres
+DB_HOST=localhost
 DB_PORT=5432
 DB_USER=${instancia_add}
-DB_PASS=${db_pass}
+DB_PASS=${mysql_root_password}
 DB_NAME=${instancia_add}
 
 JWT_SECRET=${jwt_secret}
 JWT_REFRESH_SECRET=${jwt_refresh_secret}
 
-REDIS_URI=redis://:${redis_pass}@127.0.0.1:${redis_port}
+REDIS_URI=redis://:${mysql_root_password}@127.0.0.1:${redis_port}
 REDIS_OPT_LIMITER_MAX=1
 REGIS_OPT_LIMITER_DURATION=3000
 
 USER_LIMIT=${max_user}
 CONNECTIONS_LIMIT=${max_whats}
 CLOSED_SEND_BY_ME=true
+
+MAIL_HOST="smtp.hostinger.com"
+MAIL_USER="contato@seusite.com"
+MAIL_PASS="senha"
+MAIL_FROM="Recuperar Senha <contato@seusite.com>"
+MAIL_PORT="465"
 
 [-]EOF
 EOF
