@@ -14,13 +14,10 @@ BACKEND_URL:  api.seudominio.com
 
 https://dnschecker.org/
 
-## ATUALIZAR VPS ##
+## Digite o comando abaixo##
 
 ```bash
-sudo apt -y update && apt -y upgrade
-```
-```bash
-sudo apt install -y git && git clone https://github.com/BetaCrmTI/instalador.git instalador && sudo chmod -R 777 instalador  && cd instalador  && sudo ./install_betacrm
+sudo apt -y update && apt -y upgrade && sudo apt install -y git && git clone https://github.com/BetaCrmTI/instalador.git instalador && sudo chmod -R 777 instalador  && cd instalador  && sudo ./install_betacrm
 ```
 
 ===================================================
